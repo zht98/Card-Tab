@@ -1,0 +1,42 @@
+name: Upstream Sync
+
+permissions:
+  contents: write # 设置工作流对内容的写权限
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 每天触发一次工作流（UTC时间0点）
+  workflow_dispatch: # 允许手动触发工作流
+
+jobs:
+  sync_latest_from_upstream:
+    name: Sync latest commits from upstream repo # 作业名称 从上游仓库同步最新提交
+    runs-on: ubuntu-latest # 指定运行环境为最新的 Ubuntu
+
+    if: ${{ github.event.repository.fork }} # 仅在仓库是 fork 的情况下运行
+
+    steps:
+      # 步骤1: 执行标准的 checkout 操作
+      - name: Checkout target repo
+        uses: actions/checkout@v3 # 使用 actions/checkout@v3 操作将代码签出
+
+      # 步骤2: 执行同步操作
+      - name: Sync upstream changes
+        id: sync # 设置步骤ID为 sync，供后续步骤引用
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4 # 使用 aormsby/Fork-Sync-With-Upstream-action@v3.4 操作同步上游仓库的更改
+        with:
+          upstream_sync_repo: zht98/Card-Tab # 指定上游仓库的名称
+          upstream_sync_branch: main # 指定上游仓库的分支
+          target_sync_branch: main # 指定目标仓库的分支
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }} # 使用 GitHub 提供的自动生成的 token
+
+          # 设置 test_mode 为 false 以执行实际的同步操作，而不是测试
+          test_mode: false
+
+      # 步骤3: 同步检查
+      - name: Sync check
+        if: failure() # 如果前一步失败，则执行此步骤
+        run: |
+          echo "[Error] 由于上游仓库的 workflow 文件变更，导致 GitHub 自动暂停了本次自动更新，你需要手动 Sync Fork 一次，详细教程请查看项目README.md "
+          echo "[Error] Due to a change in the workflow file of the upstream repository, GitHub has automatically suspended the scheduled automatic update. You need to manually sync your fork. Please refer to the project README.md for instructions. "
+          exit 1 # 终止工作流并返回错误码 1
