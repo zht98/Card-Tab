@@ -110,6 +110,36 @@ const HTML_CONTENT = `
     }
 
     /* 一言模块样式 */
+/*
+    #hitokoto {
+        margin: 5px 0 15px;
+        font-size: 14px;
+        color: #888;
+        font-style: italic;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        transition: all 0.3s ease;
+    }
+
+    #hitokoto a {
+        color: #43b883;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    #hitokoto a:hover {
+        color: #35a674;
+    }
+
+    body.dark-theme #hitokoto {
+        color: #a0a0a0;
+    }
+
+    body.dark-theme #hitokoto a {
+        color: #5d7fb9;
+    }
+*/
     /* 中心内容样式 */
     .center-content {
         position: absolute;
@@ -183,6 +213,36 @@ const HTML_CONTENT = `
 
     body.dark-theme .login-btn:hover {
         background-color: #4a6fa5;
+    }
+
+    /* GitHub图标按钮样式 */
+    .github-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 4px;
+        padding: 0;
+    }
+
+    .github-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .github-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: #43b883;
+        transition: fill 0.3s ease;
+    }
+
+    body.dark-theme .github-btn svg {
+        fill: #5d7fb9;
     }
 
     /* 书签搜索图标按钮样式 */
@@ -1059,6 +1119,69 @@ const HTML_CONTENT = `
         z-index: 5;
     }
 
+
+
+    /* 版权信息样式 */
+/*
+    #copyright {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+    #copyright p {
+        margin: 0;
+        font-weight: 500;
+        color: #666;
+    }
+
+    #copyright a {
+        color: #43b883;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    #copyright a:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        background-color: #43b883;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    #copyright a:hover:after {
+        transform: scaleX(1);
+    }
+
+    body.dark-theme #copyright {
+        background-color: rgba(37, 40, 48, 0.9);
+        color: #e3e3e3;
+    }
+
+    body.dark-theme #copyright a {
+        color: #5d7fb9;
+    }
+
+    body.dark-theme #copyright a:after {
+        background-color: #5d7fb9;
+    }
+*/
     /* ========== 天气组件样式 ========== */
     .weather-mini {
         display: inline-flex;
@@ -1889,6 +2012,12 @@ const HTML_CONTENT = `
         <h3><span class="weather-mini" id="weather-mini" onclick="openWeatherModal()"><span class="weather-loading">加载中...</span></span></h3>
         <div class="center-content">
             <!-- 一言模块 -->
+<!--
+            <p id="hitokoto">
+                <a href="#" id="hitokoto_text"></a>
+            </p>
+            <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+-->
             <!-- 搜索栏 -->
             <div class="search-container">
                 <div class="search-bar">
@@ -1908,6 +2037,11 @@ const HTML_CONTENT = `
         <div class="top-right-controls">
             <button class="admin-btn" id="admin-btn" onclick="toggleAdminMode()" style="display: none;">设置</button>
             <button class="login-btn" id="login-btn" onclick="handleLoginClick()">登录</button>
+            <button class="github-btn has-tooltip tooltip-bottom tooltip-green" onclick="openGitHub()" data-tooltip="喜欢请点个star">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </button>
             <div class="bookmark-search-toggle" onclick="toggleBookmarkSearch()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
@@ -2783,6 +2917,7 @@ const HTML_CONTENT = `
     }
 
 
+
     // 更新分类选择下拉框
     function updateCategorySelect() {
         const categorySelect = document.getElementById('category-select');
@@ -3283,6 +3418,12 @@ const HTML_CONTENT = `
             loginBtn.textContent = '登录';
             adminBtn.style.display = 'none';
         }
+    }
+
+    // 打开GitHub仓库
+    function openGitHub() {
+        window.open('https://github.com/zht98/Card-Tab', '_blank');
+        logAction('访问GitHub仓库');
     }
 
     // 切换书签搜索下拉框
