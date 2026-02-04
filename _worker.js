@@ -4709,6 +4709,7 @@ export default {
 
       // ========== 天气代理 API ==========
       const normalizeBaseUrl = (raw) => {
+        console.log("ENV_DUMP", JSON.stringify(env));
         const value = (raw || '').trim();
         if (!value) return null;
         const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
