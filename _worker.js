@@ -1187,8 +1187,8 @@ const HTML_CONTENT = `
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 10px;
-        background: rgba(67, 184, 131, 0.1);
+        padding: 12px 22px;
+        background: #E6F0E6;
         border-radius: 16px;
         cursor: pointer;
         transition: all 0.2s ease;
@@ -1197,7 +1197,7 @@ const HTML_CONTENT = `
         vertical-align: middle;
     }
     .weather-mini:hover {
-        background: rgba(67, 184, 131, 0.2);
+        background: #D3EADC;
         transform: translateY(-1px);
     }
     .weather-mini .weather-icon { font-size: 16px; }
@@ -1206,10 +1206,10 @@ const HTML_CONTENT = `
     .weather-mini .weather-loading { color: #999; font-size: 12px; }
 
     body.dark-theme .weather-mini {
-        background: rgba(93, 127, 185, 0.15);
+        background: #1D2430;
     }
     body.dark-theme .weather-mini:hover {
-        background: rgba(93, 127, 185, 0.25);
+        background: #242F40;
     }
     body.dark-theme .weather-mini .weather-temp { color: #e3e3e3; }
     body.dark-theme .weather-mini .weather-city { color: #aaa; }
